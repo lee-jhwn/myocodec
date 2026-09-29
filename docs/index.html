@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MyoCodec: A Streaming Neural Codec for Electromyography</title>
+<style>
+:root { --bg:#ffffff; --fg:#1a1c20; --muted:#666d78; --line:#e2e5ea; --head:#f4f6f8; }
+* { box-sizing:border-box; }
+html,body { background:var(--bg); }
+body { margin:0; color:var(--fg);
+  font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+.wrap { max-width:1180px; margin:0 auto; padding-block:40px 64px; padding-left:16px; padding-right:16px; }
+h1 { font-size:1.45rem; line-height:1.3; margin:0 0 6px; letter-spacing:-.01em;
+  font-weight:600; text-wrap:balance; }
+.sub { margin:0 0 34px; color:var(--muted); font-size:.88rem; }
+table { border-collapse:collapse; width:100%; font-size:.9rem; background:var(--bg); }
+th,td { border-bottom:1px solid var(--line); padding:9px 10px; text-align:left; vertical-align:middle; }
+thead th { background:var(--head); font-weight:600; }
+.utt { min-width:220px; max-width:300px; vertical-align:top; }
+.dur { float:right; font-size:.78rem; color:var(--muted); }
+.txt { margin:0; font-size:.86rem; }
+audio { width:205px; height:34px; }
+.scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+@media (max-width:760px) { audio { width:150px; } .utt { min-width:165px; } }
+.hero { text-align:center; margin:0 auto 30px; max-width:860px; }
+.authors { margin:14px 0 6px; font-size:1rem; }
+.authors sup, .affil sup { font-size:.68em; margin-left:1px; }
+.affil { margin:0 0 16px; color:var(--muted); font-size:.86rem; line-height:1.5; }
+.links { margin:0; display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+.links a { padding:6px 18px; border:1px solid var(--line); border-radius:999px; color:var(--fg);
+  text-decoration:none; font-size:.88rem; font-weight:500; }
+.links a:hover { background:var(--head); }
+.narrow { max-width:860px; margin:0 auto; }
+h2 { font-size:1.08rem; font-weight:600; margin:30px 0 10px; }
+.abstract { margin:0; font-size:.94rem; line-height:1.62; text-align:justify; hyphens:auto; }
+@media (max-width:760px) { .abstract { text-align:left; } }
+</style></head><body><div class="wrap">
+<header class="hero">
+<h1>MyoCodec: A Streaming Neural Codec for Electromyography</h1>
+<p class="authors">Jihwan Lee<sup>1</sup>, Kleanthis Avramidis<sup>1</sup>, Junhyeok Lee<sup>2</sup>, Tiantian Feng<sup>1</sup>, Najim Dehak<sup>2</sup>, Shrikanth Narayanan<sup>1</sup></p>
+<p class="affil"><sup>1</sup>Signal Analysis and Interpretation Lab (SAIL), University of Southern California, USA<br><sup>2</sup>Center for Language and Speech Processing, Johns Hopkins University, USA</p>
+<p class="links"><a href="https://arxiv.org/abs/XXXX.XXXXX">arXiv</a><a href="https://github.com/lee-jhwn/myocodec">Code</a><a href="https://huggingface.co/lee-jhwn/myocodec">Checkpoints</a></p>
+</header>
+<section class="narrow">
+<h2>Abstract</h2>
+<p class="abstract">Neural codecs encode continuous signals into compact sequences of discrete tokens, providing an interface for efficient transmission, storage, and token-based sequence modeling. This paradigm has been widely adopted in modern speech and audio frameworks; however, the biosignal domain still lacks a neural codec designed specifically for low-bitrate streaming and generalization across diverse downstream tasks. <b>We present MyoCodec, a streaming neural codec designed for electromyography (EMG)</b>. Inspired by recent neural audio codecs, MyoCodec combines causal Transformers with residual vector quantization to encode continuous EMG signals into different levels of EMG representations spanning from continuous latent features to discrete tokens operating at 50&nbsp;Hz. Trained on twelve public EMG datasets, MyoCodec achieves favorable performance in both intrinsic codec quality and representative downstream tasks, including typing (<i>emg2qwerty</i>), hand-pose (<i>emg2pose</i>), speech decoding (<i>emg2speech</i>), and speech-to-EMG synthesis (<i>speech2emg</i>). Across these tasks, MyoCodec exhibits strong performance against prior models while providing a compact and causal EMG representation. During streaming inference, it requires compute time of only 0.482&nbsp;ms for each 20&nbsp;ms frame, enabling real-time streaming. Also, the discrete token representation provided by MyoCodec has the potential to support integration into language-model based approaches, creating a path toward LLM-based interactive systems, where tokenized EMG representations are directly processed into such language or speech models.</p>
+</section>
+<h2>Audio samples</h2>
+
+<div class="scroll"><table><thead><tr><th>Utterance</th><th>Ground truth</th><th>MyoCodec</th><th>BioCodec-v2</th><th>TinyMyo</th><th>Gaddy</th></tr></thead>
+<tbody><tr><td class="utt"><span class="dur">2.8s</span><p class="txt">I stopped at the group of people.</p></td><td><audio controls preload="none" src="audio/ground_truth_049.wav"></audio></td><td><audio controls preload="none" src="audio/myocodec_v6_049.wav"></audio></td><td><audio controls preload="none" src="audio/biocodec_v2_049.wav"></audio></td><td><audio controls preload="none" src="audio/tinymyo_049.wav"></audio></td><td><audio controls preload="none" src="audio/gaddy_049.wav"></audio></td></tr><tr><td class="utt"><span class="dur">3.3s</span><p class="txt">To get under water!</p></td><td><audio controls preload="none" src="audio/ground_truth_092.wav"></audio></td><td><audio controls preload="none" src="audio/myocodec_v6_092.wav"></audio></td><td><audio controls preload="none" src="audio/biocodec_v2_092.wav"></audio></td><td><audio controls preload="none" src="audio/tinymyo_092.wav"></audio></td><td><audio controls preload="none" src="audio/gaddy_092.wav"></audio></td></tr><tr><td class="utt"><span class="dur">3.1s</span><p class="txt">He is not an insurance agent.”</p></td><td><audio controls preload="none" src="audio/ground_truth_002.wav"></audio></td><td><audio controls preload="none" src="audio/myocodec_v6_002.wav"></audio></td><td><audio controls preload="none" src="audio/biocodec_v2_002.wav"></audio></td><td><audio controls preload="none" src="audio/tinymyo_002.wav"></audio></td><td><audio controls preload="none" src="audio/gaddy_002.wav"></audio></td></tr><tr><td class="utt"><span class="dur">2.7s</span><p class="txt">The place was impassable.</p></td><td><audio controls preload="none" src="audio/ground_truth_079.wav"></audio></td><td><audio controls preload="none" src="audio/myocodec_v6_079.wav"></audio></td><td><audio controls preload="none" src="audio/biocodec_v2_079.wav"></audio></td><td><audio controls preload="none" src="audio/tinymyo_079.wav"></audio></td><td><audio controls preload="none" src="audio/gaddy_079.wav"></audio></td></tr><tr><td class="utt"><span class="dur">6.3s</span><p class="txt">The horse took the bit between his teeth and bolted.</p></td><td><audio controls preload="none" src="audio/ground_truth_071.wav"></audio></td><td><audio controls preload="none" src="audio/myocodec_v6_071.wav"></audio></td><td><audio controls preload="none" src="audio/biocodec_v2_071.wav"></audio></td><td><audio controls preload="none" src="audio/tinymyo_071.wav"></audio></td><td><audio controls preload="none" src="audio/gaddy_071.wav"></audio></td></tr><tr><td class="utt"><span class="dur">2.8s</span><p class="txt">I stopped short in the doorway.</p></td><td><audio controls preload="none" src="audio/ground_truth_073.wav"></audio></td><td><audio controls preload="none" src="audio/myocodec_v6_073.wav"></audio></td><td><audio controls preload="none" src="audio/biocodec_v2_073.wav"></audio></td><td><audio controls preload="none" src="audio/tinymyo_073.wav"></audio></td><td><audio controls preload="none" src="audio/gaddy_073.wav"></audio></td></tr><tr><td class="utt"><span class="dur">3.6s</span><p class="txt">It was all so real and so familiar.</p></td><td><audio controls preload="none" src="audio/ground_truth_046.wav"></audio></td><td><audio controls preload="none" src="audio/myocodec_v6_046.wav"></audio></td><td><audio controls preload="none" src="audio/biocodec_v2_046.wav"></audio></td><td><audio controls preload="none" src="audio/tinymyo_046.wav"></audio></td><td><audio controls preload="none" src="audio/gaddy_046.wav"></audio></td></tr><tr><td class="utt"><span class="dur">4.3s</span><p class="txt">It hardly seemed a fair fight to me at that time.</p></td><td><audio controls preload="none" src="audio/ground_truth_063.wav"></audio></td><td><audio controls preload="none" src="audio/myocodec_v6_063.wav"></audio></td><td><audio controls preload="none" src="audio/biocodec_v2_063.wav"></audio></td><td><audio controls preload="none" src="audio/tinymyo_063.wav"></audio></td><td><audio controls preload="none" src="audio/gaddy_063.wav"></audio></td></tr><tr><td class="utt"><span class="dur">2.8s</span><p class="txt">I could not credit it.</p></td><td><audio controls preload="none" src="audio/ground_truth_045.wav"></audio></td><td><audio controls preload="none" src="audio/myocodec_v6_045.wav"></audio></td><td><audio controls preload="none" src="audio/biocodec_v2_045.wav"></audio></td><td><audio controls preload="none" src="audio/tinymyo_045.wav"></audio></td><td><audio controls preload="none" src="audio/gaddy_045.wav"></audio></td></tr><tr><td class="utt"><span class="dur">6.3s</span><p class="txt">I saw astonishment giving place to horror on the faces of the people about me.</p></td><td><audio controls preload="none" src="audio/ground_truth_036.wav"></audio></td><td><audio controls preload="none" src="audio/myocodec_v6_036.wav"></audio></td><td><audio controls preload="none" src="audio/biocodec_v2_036.wav"></audio></td><td><audio controls preload="none" src="audio/tinymyo_036.wav"></audio></td><td><audio controls preload="none" src="audio/gaddy_036.wav"></audio></td></tr></tbody></table></div>
+</div></body></html>

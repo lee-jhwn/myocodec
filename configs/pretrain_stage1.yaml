@@ -1,0 +1,82 @@
+# MyoCodec pretraining -- STAGE 1 of 2: generator only, no discriminator instantiated.
+#
+# Paths below are relative and are meant to be overridden, e.g.
+#   python -m streaming_emg_codec.train --config configs/pretrain_stage1.yaml \
+#     --override data.root=/path/to/shards --override train.output_dir=/path/to/checkpoints
+model:
+  sample_rate: 2000
+  frame_size: 40                 # 2000/40 = 50 Hz frame rate
+  channels: null
+  encoder:
+    n_embd: 256
+    n_heads: 8
+    head_dim: 32                 # n_heads * head_dim == n_embd
+    n_layers: 8
+    n_hidden: 1024
+    dropout_rate: 0.0
+    window_size: 64
+    rotary_base: 10000.0
+  decoder:
+    n_embd: 256
+    n_heads: 8
+    head_dim: 32
+    n_layers: 8
+    n_hidden: 1024
+    dropout_rate: 0.0
+    window_size: 64
+    rotary_base: 10000.0
+  rvq:
+    num_codebooks: 6
+    codebook_size: 256
+    embedding_dim: 32
+    commitment_weight: 0.25
+    revive_every: 250
+    codebook_init: randn
+    dead_code_restart: true
+    dead_criteria: 0.9
+    counts_decay: 0.99
+    rotation_trick: false
+data:
+  kind: shards
+  root: data/shards
+  channels: 1
+  window_seconds: 5.0
+  split: train
+  batch_size: 1024
+  num_workers: 8
+loss:
+  spectral_weight: 1.0
+  vq_weight: 1.0
+  commit_weight: 0.25
+  stft_fft_sizes: [64, 128, 256]
+discriminator:
+  enabled: true
+  start_step: 100000
+  ramp_steps: 50000
+  lr: 0.0001
+  weight_decay: 0.0001
+  grad_clip: 1.0
+  adversarial_weight: 0.1
+  feature_matching_weight: 2.0
+  periods: [2, 3, 5, 7, 11]
+  mpd_base_filters: 8
+  mpd_max_filters: 128
+  stft_filters: 16
+  stft_max_filters: 128
+  stft_fft_sizes: [64, 128, 256, 512]
+  stft_hop_lengths: [17, 31, 67, 131]
+  stft_win_lengths: [64, 128, 256, 512]
+train:
+  device: cuda
+  seed: 1337
+  optimizer: muon
+  lr: 0.0003
+  muon_lr: 0.02
+  weight_decay: 0.01
+  max_steps: 100000
+  log_every: 25
+  save_every: 5000
+  output_dir: checkpoints/myocodec
+  grad_clip: 1.0
+  use_amp: true
+  max_gpu_memory_gb: 90.0

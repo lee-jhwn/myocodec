@@ -1,0 +1,14 @@
+torch>=2.4
+numpy>=1.24
+scipy>=1.11
+h5py>=3.9
+PyYAML>=6.0
+muon-optimizer>=0.1
+huggingface_hub>=0.34
+
+wandb>=0.16
+flash-attn>=2.5
+
+wfdb>=4.1
+pandas>=2.0
+tables>=3.9
