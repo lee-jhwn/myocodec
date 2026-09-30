@@ -4,7 +4,7 @@ Jihwan Lee<sup>1</sup>, Kleanthis Avramidis<sup>1</sup>, Junhyeok Lee<sup>2</sup
 
 <sup>1</sup>Signal Analysis and Interpretation Lab (SAIL), University of Southern California, USA<br><sup>2</sup>Center for Language and Speech Processing, Johns Hopkins University, USA
 
-[Paper](https://arxiv.org/abs/XXXX.XXXXX) | [Audio samples](https://lee-jhwn.github.io/myocodec/) | [Checkpoints](https://huggingface.co/lee-jhwn/myocodec)
+[Paper](https://arxiv.org/abs/2609.36687) | [Audio samples](https://lee-jhwn.github.io/myocodec/) | [Checkpoints](https://huggingface.co/lee-jhwn/myocodec)
 
 Official PyTorch implementation.
 
